@@ -116,9 +116,9 @@ Self-hosted, community-driven platforms for team hierarchies, identity governanc
 
 ### ⭐ Open-Source Solutions (Ranked by Stars)
 
-*Solutions are sorted by GitHub Star Count in descending order:* 🌟
+*Solutions are sorted by GitHub Stars_Count in descending order:* 🌟
 
-| Project | GitHub Stars | Stack | License | Primary Focus |
+| Project | GitHub_Stars | Stack | License | Primary Focus |
 | :--- | :---: | :--- | :--- | :--- |
 | **[Keycloak](https://github.com/keycloak/keycloak)** 🔐 | [![Stars](https://img.shields.io/github/stars/keycloak/keycloak?style=social&color=white)](https://github.com/keycloak/keycloak/stargazers) | Java ☕ | Apache 2.0 📜 | Full-featured enterprise IAM, OpenID Connect / SAML IdP, user federation, fine-grained role & group hierarchies |
 | **[Authelia](https://github.com/authelia/authelia)** 🛡️ | [![Stars](https://img.shields.io/github/stars/authelia/authelia?style=social&color=white)](https://github.com/authelia/authelia/stargazers) | Go 🐹 | Apache 2.0 📜 | Single Sign-On and 2FA authentication portal and companion for reverse proxies with group-based access control |

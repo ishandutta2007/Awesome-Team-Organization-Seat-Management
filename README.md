@@ -116,7 +116,7 @@ Self-hosted, community-driven platforms for team hierarchies, identity governanc
 
 ### ⭐ Open-Source Solutions (Ranked by Stars)
 
-*Solutions are sorted by GitHub Stars_Count in descending order:* 🌟
+*Solutions are sorted by GitHub_Stars_Count in descending order:* 🌟
 
 | Project | GitHub_Stars | Stack | License | Primary Focus |
 | :--- | :---: | :--- | :--- | :--- |

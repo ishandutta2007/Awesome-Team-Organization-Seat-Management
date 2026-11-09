@@ -1,148 +1,160 @@
-# Awesome-Team-Organization-Seat-Management
-
 # Awesome Team Organization & Seat Management
 
-> A curated list of top Team Organization and Seat Management platforms — both SaaS/Hosted commercial solutions and open-source alternatives for managing team hierarchies, user groups, license allocation, and role-based access across organizational tools.
-> 🌟 Star this repo if you find it useful! 🌟
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+
+A curated list of top **Team Organization**, **User Provisioning**, **Identity & Access Management (IAM)**, and **Seat & License Management** platforms. This guide features SaaS/hosted enterprise platforms and open-source self-hosted solutions for managing team hierarchies, user groups, SCIM directory synchronization, role-based access control (RBAC), and license quota allocation.
+
+> 🌟 **Star this repo if you find it useful!** 🌟
 
 ---
 
 ## 📋 Table of Contents
 
+- [Sector Overview & Market Dynamics](#-sector-overview--market-dynamics)
 - [SaaS / Hosted Platforms](#-saas--hosted-platforms)
-  - [BrowserStack Team Management](#browserstack-team-management)
-  - [Slack SCIM & User Groups](#slack-scim--user-groups)
-  - [Google Workspace Admin Groups](#google-workspace-admin-groups)
-  - [Microsoft Entra Group-Based Licensing](#microsoft-entra-group-based-licensing)
-  - [GitHub Teams](#github-teams)
-  - [GitLab Group Members](#gitlab-group-members)
-  - [Notion SCIM & Teamspaces](#notion-scim--teamspaces)
-  - [Asana SCIM Provisioning](#asana-scim-provisioning)
+  - [SaaS Overview & Comparison Table](#saas-overview--comparison-table)
+  - [Detailed SaaS Profiles](#detailed-saas-profiles)
 - [Open-Source Software](#-open-source-software)
-  - [Hitobito](#hitobito)
-  - [Apache Syncope](#apache-syncope)
-  - [GoSCIM](#goscim)
-  - [Perun IdM](#perun-idm)
-  - [Sesame IDAM](#sesame-idam)
-- [Comparison at a Glance](#-comparison-at-a-glance)
+  - [Open-Source Solutions (Ranked by Stars)](#open-source-solutions-ranked-by-stars)
+- [Feature Comparison Matrix](#-feature-comparison-matrix)
 - [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## 🌐 Sector Overview & Market Dynamics
+
+The global Identity and Access Management (IAM) and SaaS Operations market is valued at approximately **$21B–$26B in 2025/2026** and projected to exceed **$60B+ by 2032** (CAGR ~12–14%). The sector exhibits a **bifurcated, moderately concentrated market dynamic** where foundational directory and identity infrastructure operates as a high-barrier "winner-take-most" ecosystem dominated by hyperscalers (Microsoft Entra ID, Google Workspace, Okta), while granular seat allocation, fine-grained permissions, and cross-SaaS license lifecycle management remain moderately fragmented among best-of-breed specialized tools and open-source frameworks.
 
 ---
 
 ## 🟦 SaaS / Hosted Platforms
 
-Commercial, cloud-hosted Team Organization and Seat Management platforms. These are not open-source but are included as reference points for feature comparison.
+### SaaS Overview & Comparison Table
 
-### BrowserStack Team Management
-**Type:** Test platform teams with granular seat allocation
-BrowserStack allows organization Owners and Admins to create Teams that reflect internal structure (e.g., Frontend, MobileSquad) and assign members to them [citation:1]. The critical differentiator for seat management is **User License Allocation**: the owner can assign a fixed number of product licenses (e.g., 25 Live licenses to Team A) while leaving other teams to share from the organization pool [citation:1]. Advanced features include **Manage Data Access** (restricting test data visibility to a user's own team) and **Multiple Teams** (a user can belong to one Primary Team for license deduction and multiple Additional Teams for collaboration) [citation:1]. Teams and user access can also be managed via REST API, including updating RBAC roles and product access [citation:14].
-**Best for:** Organizations using BrowserStack Enterprise wanting granular control over which teams consume specific product licenses and what test data each team can see.
+The following SaaS solutions provide built-in team hierarchy modeling, SCIM user provisioning, or granular seat and license management. Sorted by **Company Scale / Valuation (Descending)**:
 
-### Slack SCIM & User Groups
-**Type:** Enterprise messaging user provisioning and groups
-Slack supports SCIM 2.0 for provisioning and deprovisioning users and groups, primarily for Enterprise organizations where SCIM operations span the entire org rather than individual workspaces [citation:3]. Creating a SCIM group creates an IDP group. **Key limitations:** Users cannot be permanently deleted (only deactivated); duplicate emails fail provisioning even if the existing user is deactivated; single-channel guests cannot be fully provisioned via SCIM [citation:3]. Group mention handles (@group) cannot be set via SCIM. The Slack Python SDK provides SCIM API wrappers for Users and Groups [citation:15].
-**Best for:** Enterprise organizations using an IdP (Okta, OneLogin) to automate Slack user lifecycle and group membership, accepting SCIM limitations for guests and deletion.
+| Platform | Company Scale / Valuation | Pricing (Starting Tier) | Free Tier Limit / Free Trial | Core Seat & Organization Capability |
+| :--- | :--- | :--- | :--- | :--- |
+| **[Microsoft Entra ID](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id)** | **$3.1+ Trillion** (Market Cap) | **$7.00** / user / month (P1 tier) | **Free Plan**: Up to 300,000 directory objects (with verified domain; 50k unverified); 30-day trial for P1/P2 | Automated group-based licensing across Microsoft 365 / Azure workloads |
+| **[Google Workspace](https://workspace.google.com/)** | **$2.1+ Trillion** (Alphabet Market Cap) | **$7.00** / user / month (Business Starter, annual commitment) | **Free Trial**: 14 days full access (no perpetual free tier) | Directory API for nested groups, delegated admin roles, and member management |
+| **[Slack (Salesforce)](https://slack.com/)** | **$260+ Billion** (Salesforce Market Cap; Slack acquired for ~$27.7B) | **$7.25** / user / month (Pro, billed annually) | **Free Plan**: 90 days message history, 10 app integrations, 1:1 audio/video huddles | SCIM 2.0 provisioning, enterprise IDP groups, Fair Billing policy on active seats |
+| **[GitHub Teams](https://github.com/)** | **$100+ Billion** (Microsoft subsidiary; acquired for $7.5B in 2018) | **$4.00** / user / month (Team plan) | **Free Plan**: Unlimited public/private repos, 2,000 CI/CD Actions mins/mo, 500 MB packages | Nested team hierarchy with inherited repository access and IdP team sync |
+| **[Notion](https://www.notion.so/)** | **$11.0 Billion** (Valuation, 2025/2026 tender) | **$10.00** / user / month (Plus, billed annually) | **Free Plan**: Unlimited blocks for individuals, 1,000 block cap for 2+ users, 5 MB file upload limit | SCIM 2.0 API, Enterprise Teamspaces, role-based workspace permissions |
+| **[GitLab](https://about.gitlab.com/)** | **$6.3+ Billion** (Market Cap NASDAQ: GTLB) | **$29.00** / user / month (Premium, billed annually) | **Free Plan**: Up to 5 users per top-level private group namespace, 400 CI/CD minutes/month | Hierarchical subgroups, billable members tracking API across namespaces |
+| **[BrowserStack](https://www.browserstack.com/)** | **$4.0 Billion** (Valuation, Series B) | **$29.00** / user / month (Live Desktop, billed annually) | **Free Trial**: 30 minutes manual Live testing, 100 mins automated testing, 100 screenshots | User license allocation per team, primary team deduction, cross-team test isolation |
+| **[Asana](https://asana.com/)** | **$2.5+ Billion** (Market Cap NYSE: ASAN) | **$10.99** / user / month (Starter, billed annually) | **Free Plan**: Maximum 2 user seats, unlimited tasks/projects, 100 MB file limit | SCIM user and team provisioning, role assignment via enterprise service token |
 
-### Google Workspace Admin Groups
-**Type:** Directory groups with nested membership and roles
-Google Workspace Directory API manages group members with three roles: **OWNER** (full control including deletion), **MANAGER** (everything except making owners or deleting), and **MEMBER** (subscribe, view archives, view membership) [citation:4]. Groups can be nested (a group can be a member of another group), but cyclic memberships are rejected. Nested group members may take up to 10 minutes to propagate to the parent group. The API supports adding, updating, retrieving, and listing members with pagination [citation:4].
-**Best for:** Google Workspace organizations needing hierarchical group structures with delegated administration roles and API-driven membership management.
+---
 
-### Microsoft Entra Group-Based Licensing
-**Type:** Automated license assignment via security groups
-Microsoft Entra ID supports **group-based licensing**: security groups are configured to automatically assign licenses from a set of subscriptions to all members [citation:5]. When a user is added to or removed from the group, licenses are automatically assigned or unassigned. **Critical constraint:** You must ensure enough licenses exist for all group members; if licenses run out, new users will not be assigned licenses until more become available [citation:5]. Group-based licensing should not be configured for groups containing Azure B2B accounts.
-**Best for:** Microsoft 365 enterprises wanting to automate license assignment and removal based on security group membership, reducing manual admin overhead.
+### Detailed SaaS Profiles
 
-### GitHub Teams
-**Type:** Repository access teams with nested membership
-GitHub Teams group organization members for repository permissions. Team members include members of child teams, with each membership having a role (`member` or `maintainer`) and an `inherited` flag indicating whether membership comes from a child team [citation:6]. The REST API supports listing team members filtered by role, and adding or updating team membership (requires org owner or team maintainer). Team synchronization with an IdP is available on GitHub Enterprise Cloud [citation:6].
-**Best for:** GitHub organizations needing nested teams with inherited permissions and API-driven membership management for repository access.
+#### Microsoft Entra Group-Based Licensing
+- **Type:** Automated license assignment via security groups
+- **Key Capabilities:** Microsoft Entra ID supports group-based licensing where security groups automatically assign subscription licenses to members. Adding or removing users dynamically provisions or unassigns licenses.
+- **Best For:** Microsoft 365 / Azure enterprise environments seeking automated seat provisioning linked directly to corporate directory security groups.
 
-### GitLab Group Members
-**Type:** Hierarchical groups with billable member tracking
-GitLab Groups support hierarchical membership, and the **Billable Members API** lists all members consuming a license, including members from subgroups and projects [citation:7]. This endpoint only works on top-level groups. The API supports searching by name/username/email and sorting by access level, join date, or last activity. A separate endpoint lists all memberships for a specific billable member, showing which projects and subgroups they belong to [citation:7].
-**Best for:** GitLab organizations needing visibility into exactly which users are consuming licenses across nested groups and projects.
+#### Google Workspace Admin Groups
+- **Type:** Directory groups with nested hierarchy and delegated administration
+- **Key Capabilities:** Google Workspace Directory API manages nested group structures with `OWNER`, `MANAGER`, and `MEMBER` roles. Groups can be nested with inherited permissions and managed via API.
+- **Best For:** Organizations standardizing on Google Workspace requiring delegated administration and API-driven group provisioning.
 
-### Notion SCIM & Teamspaces
-**Type:** Enterprise workspace provisioning and groups
-Notion's SCIM API (Enterprise plan only) provisions users and groups, with a requirement for SAML 2.0 IdP support [citation:9]. SCIM can create/remove members, update profiles, create/remove groups, and manage group membership. **Important:** SCIM cannot manage workspace guests. A separate SCIM token is required for each workspace being managed. The `role` attribute supports `owner`, `membership_admin`, `member`, and `restricted_member` [citation:9].
-**Best for:** Notion Enterprise organizations using an IdP to automate user and group provisioning, accepting that guest management remains manual.
+#### Slack SCIM & User Groups
+- **Type:** Enterprise messaging user provisioning and identity groups
+- **Key Capabilities:** Full SCIM 2.0 support across enterprise organizations for provisioning and deprovisioning users and groups. Slack features an automated Fair Billing policy that only charges for actively participating seats.
+- **Best For:** Enterprises utilizing Okta, Entra ID, or OneLogin to automate group membership and user lifecycle across communication channels.
 
-### Asana SCIM Provisioning
-**Type:** Enterprise user and team provisioning
-Asana supports SCIM provisioning via Microsoft Entra ID (and other IdPs), automatically creating/removing users and keeping attributes synchronized [citation:10]. SCIM can also provision groups and group memberships. Prerequisites include an Asana Enterprise plan and admin access to generate a Service Account token with scopes: Users: Read, Users: Create and modify, and Teams: Read [citation:10]. Attribute mapping includes userName, active, name.formatted, title, department, manager, and employeeNumber.
-**Best for:** Asana Enterprise organizations wanting automated user and team provisioning from their IdP, with attribute synchronization.
+#### GitHub Teams
+- **Type:** Repository access teams with nested membership
+- **Key Capabilities:** Supports hierarchical child teams with inherited permissions (`member` or `maintainer`). Team synchronization with enterprise identity providers is natively supported on GitHub Enterprise Cloud.
+- **Best For:** Software engineering teams needing granular repository permissions and inherited access controls tied to IdP groups.
+
+#### Notion SCIM & Teamspaces
+- **Type:** Enterprise workspace provisioning and granular teamspaces
+- **Key Capabilities:** SCIM API provisions users and groups with SAML 2.0 IdP integration. Granular role mapping includes `owner`, `membership_admin`, `member`, and `restricted_member` across segregated teamspaces.
+- **Best For:** Knowledge-base and project documentation management across multi-department enterprises.
+
+#### GitLab Group Members
+- **Type:** Hierarchical groups with billable member tracking
+- **Key Capabilities:** Hierarchical group architecture equipped with a dedicated Billable Members API to inspect which specific users consume paid license seats across nested projects and subgroups.
+- **Best For:** DevOps and engineering organizations requiring clear visibility into license utilization across multi-tier repositories.
+
+#### BrowserStack Team Management
+- **Type:** Granular seat allocation and test data segregation
+- **Key Capabilities:** Administrators can allocate fixed numbers of licenses directly to custom teams rather than draining an organization-wide pool. Supports Primary Team seat deductions and Additional Team collaboration.
+- **Best For:** Large QA and engineering organizations managing shared cloud device testing pools across distributed squads.
+
+#### Asana SCIM Provisioning
+- **Type:** Enterprise user and team provisioning
+- **Key Capabilities:** SCIM integration via Microsoft Entra ID or Okta to synchronize user attributes, provision project teams, and deactivate departing members automatically via Service Account tokens.
+- **Best For:** Enterprise project tracking with automated employee directory synchronization.
 
 ---
 
 ## 🟩 Open-Source Software
 
-Self-hosted, community-driven Team Organization and Seat Management tools. The open-source ecosystem splits between **group hierarchy managers** and **identity governance/SCIM servers**.
+Self-hosted, community-driven platforms for team hierarchies, identity governance, access control, and user provisioning.
 
-### Hitobito
-**Stack:** Ruby on Rails | **License:** AGPL-3.0
-Hitobito is an open-source web application for managing **complex group hierarchies** with members, events, courses, and mailings [citation:19]. It provides a powerful meta-model: groups are arranged in a tree, each group type has specific role types with permissions, and layers define permission ranges. The core does not provide specific group/role types—these are defined in organization-specific plugins (Wagons). This makes it exceptionally suited for organizations with distributed structures (political parties with local chapters, associations with regional branches). Every user's abilities are derived from their role permissions across their different groups [citation:19].
-**Best for:** Associations, non-profits, and federated organizations needing to model complex nested group hierarchies with role-based permissions rather than simple seat counting.
+### Open-Source Solutions (Ranked by Stars)
 
-### Apache Syncope
-**Stack:** Java | **License:** Apache 2.0
-Apache Syncope is an open-source Identity and Access Management (IAM) and Identity Governance Administration (IGA) platform [citation:16]. It provides centralized user, group, role, and entitlement management with automated provisioning/deprovisioning workflows. Supports RBAC, delegated administration, LDAP/AD/database connectors, SAML 2.0, OIDC, and **SCIM standards** [citation:16]. Includes audit logging and compliance reporting. Available via Azure Marketplace with Docker deployment.
-**Best for:** Organizations wanting a standards-based, Apache-governed IGA platform for centralized group and role management across heterogeneous directories and applications.
+*Solutions are sorted by GitHub Star Count in descending order:*
 
-### GoSCIM
-**Stack:** Go | **License:** Open Source
-GoSCIM is a lightweight, high-performance SCIM 2.0 server built in Go, designed for user provisioning from IdPs like Okta and Azure [citation:23]. It implements full RFC 7643/7644 compliance, supports dynamic schema loading, advanced ANTLR-based filter parsing, and scales from 10 to 100,000+ users. Integrates with Active Directory, LDAP, Salesforce, Slack, and more. Docker deployment with Couchbase backend. Described as "the fastest and most flexible open-source implementation of the SCIM 2.0 protocol" [citation:23].
-**Best for:** Developers needing a focused, fast SCIM server to receive user/group provisioning from enterprise IdPs without deploying a full IAM suite.
-
-### Perun IdM
-**Stack:** Java | **License:** Open Source
-Perun is an identity and access management system primarily targeting **academia**, for managing users within organizations and projects and managing access rights to services [citation:24]. Features include automated identity management workflows, provisioning/deprovisioning, delegated user/service management, group and virtual organization organization, full user lifecycle handling, self-registration via invitations, and import/export/sync with existing user databases. All actions are audited.
-**Best for:** Research institutions and universities needing to manage users across projects, virtual organizations, and service access with delegated administration.
-
-### Sesame IDAM
-**Stack:** Rust | **License:** Open Source
-Sesame is a self-hosted identity and access management system with a **portable OIDC provider contract** and org-scoped authorization [citation:17]. Features include EdDSA-signed JWT access tokens, coarse-grained checks via JWT claims (zero latency for "is Admin?"), fine-grained ABAC authorization via `POST /authorize`, role inheritance, application/RP model, webhook system, and API keys. The project emphasizes a self-hosted, no per-user pricing model. OpenAPI specs are published for six services (identity-login, identity-session, identity-user-mgmt, authz-core, api-keys, org-mgmt) [citation:17].
-**Best for:** Teams wanting a modern, Rust-based IDAM with org-scoped authorization and a portable contract, accepting that the project is early-stage with some features (webhooks, application model) still in progress.
+| Project | GitHub Stars | Stack | License | Primary Focus |
+| :--- | :---: | :--- | :--- | :--- |
+| **[Keycloak](https://github.com/keycloak/keycloak)** | [![Stars](https://img.shields.io/github/stars/keycloak/keycloak?style=social&color=white)](https://github.com/keycloak/keycloak/stargazers) | Java | Apache 2.0 | Full-featured enterprise IAM, OpenID Connect / SAML IdP, user federation, fine-grained role & group hierarchies |
+| **[Authelia](https://github.com/authelia/authelia)** | [![Stars](https://img.shields.io/github/stars/authelia/authelia?style=social&color=white)](https://github.com/authelia/authelia/stargazers) | Go | Apache 2.0 | Single Sign-On and 2FA authentication portal and companion for reverse proxies with group-based access control |
+| **[Authentik](https://github.com/goauthentik/authentik)** | [![Stars](https://img.shields.io/github/stars/goauthentik/authentik?style=social&color=white)](https://github.com/goauthentik/authentik/stargazers) | Python, Go | GPL-3.0 | Modern identity provider with built-in SCIM provider/consumer, flow-based user lifecycle, and group policies |
+| **[ZITADEL](https://github.com/zitadel/zitadel)** | [![Stars](https://img.shields.io/github/stars/zitadel/zitadel?style=social&color=white)](https://github.com/zitadel/zitadel/stargazers) | Go | Apache 2.0 | Cloud-native multi-tenant identity infrastructure with organizational hierarchies, projects, and delegated team roles |
+| **[Casdoor](https://github.com/casdoor/casdoor)** | [![Stars](https://img.shields.io/github/stars/casdoor/casdoor?style=social&color=white)](https://github.com/casdoor/casdoor/stargazers) | Go | Apache 2.0 | Multi-tenant UI-first IAM platform with SCIM 2.0, WebAuthn, OAuth/OIDC, and organization member management |
+| **[Permify](https://github.com/Permify/permify)** | [![Stars](https://img.shields.io/github/stars/Permify/permify?style=social&color=white)](https://github.com/Permify/permify/stargazers) | Go | Apache 2.0 | Google Zanzibar-inspired authorization service for modeling multi-tenant organizational hierarchies and permissions |
+| **[MidPoint](https://github.com/Evolveum/midpoint)** | [![Stars](https://img.shields.io/github/stars/Evolveum/midpoint?style=social&color=white)](https://github.com/Evolveum/midpoint/stargazers) | Java | EUPL 1.2 | Comprehensive open-source Identity Governance and Administration (IGA) with identity lifecycle and role cataloging |
+| **[Hitobito](https://github.com/hitobito/hitobito)** | [![Stars](https://img.shields.io/github/stars/hitobito/hitobito?style=social&color=white)](https://github.com/hitobito/hitobito/stargazers) | Ruby on Rails | AGPL-3.0 | Tree-structured group hierarchy management with role inheritance for associations, federated NGOs, and clubs |
+| **[Apache Syncope](https://github.com/apache/syncope)** | [![Stars](https://img.shields.io/github/stars/apache/syncope?style=social&color=white)](https://github.com/apache/syncope/stargazers) | Java | Apache 2.0 | Standards-based identity governance, SCIM server, automated user provisioning, and enterprise role entitlements |
+| **[Perun IdM](https://github.com/CESNET/perun)** | [![Stars](https://img.shields.io/github/stars/CESNET/perun?style=social&color=white)](https://github.com/CESNET/perun/stargazers) | Java | Apache 2.0 | Virtual organization (VO) management, academic project access control, and distributed group administration |
+| **[GoSCIM](https://github.com/arturoeanton/goscim)** | [![Stars](https://img.shields.io/github/stars/arturoeanton/goscim?style=social&color=white)](https://github.com/arturoeanton/goscim/stargazers) | Go | MIT | Lightweight, high-performance RFC 7643/7644 SCIM 2.0 provisioning server for IdP directory sync |
+| **[Sesame IDAM](https://github.com/microscaler/sesame-idam)** | [![Stars](https://img.shields.io/github/stars/microscaler/sesame-idam?style=social&color=white)](https://github.com/microscaler/sesame-idam/stargazers) | Rust | Apache 2.0 | Modern, self-hosted OIDC provider with org-scoped authorization and fine-grained ABAC verification |
 
 ---
 
-## 📊 Comparison at a Glance
+## 📊 Feature Comparison Matrix
 
-| Software | License | Stack | Group Hierarchy | Seat/License Mgmt | SCIM | Self-Hosted | Best For |
-|----------|---------|-------|-----------------|-------------------|------|-------------|----------|
-| **BrowserStack Teams** | Proprietary | Cloud | Flat teams | ✅ Granular allocation | API | ❌ | Test platform seat control |
-| **Slack SCIM** | Proprietary | Cloud | IDP groups | (Via IdP) | ✅ | ❌ | Enterprise messaging provisioning |
-| **Google Workspace** | Proprietary | Cloud | Nested groups + roles | ❌ | (API) | ❌ | Directory group hierarchy |
-| **Entra Group Licensing** | Proprietary | Cloud | Security groups | ✅ Automatic | (Entra) | ❌ | Microsoft 365 license automation |
-| **GitHub Teams** | Proprietary | Cloud | Nested teams | (Via org) | (Entra sync) | ❌ | Repository access teams |
-| **GitLab Groups** | Proprietary | Cloud | Hierarchical groups | ✅ Billable members API | (SCIM) | ❌ | License consumption visibility |
-| **Notion SCIM** | Proprietary | Cloud | Groups + Teamspaces | (Enterprise seats) | ✅ | ❌ | Notion Enterprise provisioning |
-| **Asana SCIM** | Proprietary | Cloud | Groups + Teams | (Enterprise seats) | ✅ | ❌ | Asana Enterprise provisioning |
-| **Hitobito** | AGPL-3.0 | Ruby/Rails | ✅ Deep tree + layers | (Roles, not seats) | ❌ | ✅ | Complex organizational hierarchies |
-| **Apache Syncope** | Apache 2.0 | Java | Groups + roles | (Entitlements) | ✅ | ✅ | Standards-based IGA |
-| **GoSCIM** | Open Source | Go | SCIM groups | (Via SCIM) | ✅ | ✅ | Fast SCIM provisioning |
-| **Perun IdM** | Open Source | Java | Groups + VOs | (Access rights) | (Check) | ✅ | Academia/research orgs |
-| **Sesame IDAM** | Open Source | Rust | Orgs + roles | (Entitlements) | (Check) | ✅ | Modern OIDC + ABAC |
+| Software / Project | Type | Group Hierarchy | Seat / Quota Allocation | SCIM Provisioning | Self-Hosted | Primary Stack |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Microsoft Entra ID** | SaaS | Security Groups | ✅ Automated group licenses | ✅ Full SCIM 2.0 | ❌ | Cloud |
+| **Google Workspace** | SaaS | Nested Groups + Roles | ❌ License per account | ⚠️ Via Directory API | ❌ | Cloud |
+| **Slack SCIM** | SaaS | IDP Groups | ⚠️ Fair active-seat billing | ✅ Full SCIM 2.0 | ❌ | Cloud |
+| **GitHub Teams** | SaaS | Nested Teams | ⚠️ Org seat pool | ⚠️ IdP Team Sync | ❌ | Cloud |
+| **Notion** | SaaS | Groups + Teamspaces | ⚠️ Workspace seat pool | ✅ Enterprise SCIM | ❌ | Cloud |
+| **GitLab** | SaaS / Self-Host | Hierarchical Subgroups | ✅ Billable Members API | ✅ Full SCIM 2.0 | Optional | Ruby, Go, Vue |
+| **BrowserStack** | SaaS | Granular Teams | ✅ Granular quota per team | ⚠️ REST API | ❌ | Cloud |
+| **Asana** | SaaS | Teams + Workspaces | ⚠️ Workspace seat pool | ✅ Full SCIM 2.0 | ❌ | Cloud |
+| **Keycloak** | Open-Source | ✅ Deep Group Tree | ⚠️ Role/Attribute based | ⚠️ Via Extensions | ✅ | Java |
+| **Authelia** | Open-Source | Flat / Rule Groups | ❌ Access policy only | ❌ | ✅ | Go |
+| **Authentik** | Open-Source | ✅ Groups & Users | ⚠️ Quota / Flow policies | ✅ Provider & Consumer | ✅ | Python, Go |
+| **ZITADEL** | Open-Source | ✅ Org / Project Roles | ⚠️ Multi-tenancy scopes | ⚠️ In progress / API | ✅ | Go |
+| **Casdoor** | Open-Source | ✅ Multi-Org + Groups | ⚠️ Quota / App limits | ✅ Built-in SCIM | ✅ | Go |
+| **Permify** | Open-Source | ✅ Zanzibar Relations | ⚠️ Relation-based checks | ⚠️ API driven | ✅ | Go |
+| **MidPoint** | Open-Source | ✅ Full Org Structure | ✅ Entitlement governance | ✅ Full SCIM 2.0 | ✅ | Java |
+| **Hitobito** | Open-Source | ✅ Deep Tree + Layers | ❌ Roles & permissions | ❌ | ✅ | Ruby on Rails |
+| **Apache Syncope** | Open-Source | ✅ Org Units & Roles | ✅ Entitlements engine | ✅ Full SCIM 2.0 | ✅ | Java |
+| **Perun IdM** | Open-Source | ✅ Virtual Orgs + Groups | ⚠️ Service access rights | ⚠️ Via connectors | ✅ | Java |
+| **GoSCIM** | Open-Source | Flat SCIM Groups | ❌ Directory sync only | ✅ RFC 7643/7644 | ✅ | Go |
+| **Sesame IDAM** | Open-Source | Org + Roles | ⚠️ Org-scoped ABAC | ❌ | ✅ | Rust |
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you know of an open-source Team Organization or Seat Management tool that should be listed here, please open a pull request with:
+Contributions are welcome! If you know of an open-source or enterprise platform specializing in team organization, identity governance, or seat/license allocation:
 
-- Project name and URL
-- Brief description (1–2 sentences)
-- Stack and license
-- Why it stands out
-
-Please ensure the project is actively maintained (releases within the last 12 months) and genuinely open-source. Note that the open-source ecosystem **splits** between group hierarchy managers (Hitobito) and identity governance/provisioning servers (Syncope, GoSCIM, Perun). No open-source tool replicates BrowserStack's specific model of allocating fixed product licenses per team, but Hitobito offers the deepest organizational hierarchy modeling and Syncope offers the most comprehensive IGA capabilities.
+1. Fork this repository.
+2. Create a new branch: `git checkout -b feature/add-tool`.
+3. Add the tool to the appropriate table and profile section following the existing format.
+4. Open a Pull Request with a clear summary of the platform's unique value proposition.
 
 ---
 
 ## 📄 License
 
-This list is released under CC0 1.0 Universal (Public Domain). The software projects listed retain their respective licenses.
-
----
-
-⭐ **If this list helped you discover a useful tool, please star the repo!** ⭐
+This repository and its curated documentation are published under the **[CC0 1.0 Universal (Public Domain)](http://creativecommons.org/publicdomain/zero/1.0/)** license. Individual software platforms and projects mentioned retain their respective trademarks and licenses.
